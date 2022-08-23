@@ -1,0 +1,456 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Maple's Portfolio - Labyrinth</title>
+        <link rel="stylesheet" href="styles.css">
+        <!--Google Font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,900;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inconsolata&family=Lato:ital,wght@0,300;0,400;0,900;1,900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div>
+            <img class="logosmall" src="Resources\Logos\Logo2022.png" alt="">
+        </div>
+        <h1 class="pagesubtitle">Maple's Projects</h2>
+        <hr style="height: 1px; width: 100px; position: relative; background-color: white;">
+        <h2 class="pagetitle">Labyrinth</h1>
+
+        <div class="navigation">
+            <span>
+                <a href="\portfolio\index.html">Home</a>
+                <span class="vertdiv"></span>
+                <a href="#section1">About</a>
+                <span class="vertdiv"></span>
+                <a href="#section2">Gallery</a>
+                <span class="vertdiv"></span>
+                <a href="#section3">Code</a>
+                <span class="vertdiv"></span>
+                <a href="#section4">Tutorial</a>
+                <span class="vertdiv"></span>
+                <a href="">Contact</a>
+            </span>
+        </div>
+        <!-- <div class="navigation">
+            <span>
+
+
+            </span>
+        </div> -->
+        <br>
+        <div id="section1" class="sectionheader">
+            <!-- About Section -->
+            <span>About</span>
+            <div class= "sectionsubtext">
+                <p><em>Project Labyrinth</em> is a Work in Progress 2D roguelike game for PC. It is written using C# and MonoGame.</p>
+                <p>
+                    The goal for <em>Project Labyrinth</em> is to create a roguelike experience with a fun and smooth combat system.
+                    The game uses a state machine design pattern to manage it's combat system. It also uses an input buffer similar to
+                    fighting games to manage player inputs. As with a lot of my projects, I've implemented a particle system to add
+                    flashy sword clashing effects to the game. Labyrinth also has systems in place for collectibles.
+                </p>
+                <br>
+                <!-- Video 1 -->
+                <video autoplay muted loop width="400">
+                    <source src="Resources/Labyrinth/Lab-Pickup.webm" type="video/webm">
+                    Error
+                </video>
+                <p class="caption">Players can gather collectibles.</p>
+                <br>
+                <!-- Video 2 -->
+                <video autoplay muted loop width="400">
+                    <source src="Resources/Labyrinth/Lab-Attacks.webm" type="video/webm">
+                    Error
+                </video>
+                <p class="caption">An example of a Combo and Special Attack</p>
+                <p>
+                    <em>Project Labyrinth</em> also currently has a basic system for procedurally generating random levels. It uses
+                    an API called <a href="https://github.com/Auburn/FastNoiseLite">Fast Noise LIbrary</a> to generate noise, then
+                    a method is called to generate a tilemap. I plan on improving this tilemap generation by adding additional passes
+                    to the generated base tilemap.
+                </p>
+                <div class="biggerimg">
+                    <img src="Resources\Labyrinth\Lab-Caves.jpg" alt="">
+                    <p class="caption">A procedurally generated cave tilemap</p>
+                </div>
+                <p>
+                    All Programming, Artwork, and Design by Maple.
+                </p>
+            </div>
+        </div>
+        <br>
+        <span id="section2" class="sectionheader">
+            <span>Sprite Gallery</span>
+            <div class="smallerimg">
+                <div class="row">
+                    <div class="column">
+                        <img src="Resources\Labyrinth\Player01.gif" alt="">
+                    </div>
+                    <div class="column">
+                        <img src="Resources\Labyrinth\SwordAttack1.gif" alt="">
+                    </div>
+                    <div class="row">
+                        <div class="column3">
+                            <img src="Resources\Labyrinth\DaggersAttack1.gif" alt="">
+                        </div>
+                        <div class="column3">
+                            <img src="Resources\Labyrinth\DaggersAttack2.gif" alt="">
+                        </div>
+                        <div class="column3">
+                            <img src="Resources\Labyrinth\DaggersAttack3.gif" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </span>
+        <br>
+        <span id="section3" class="sectionheader">
+            <span>Code Example</span>
+            <div class="sectionsubtextsmall">
+                <p>
+                    Here's an example of how player inputs are handled in <em>Labyrinth</em>. This is one of my favorite examples of
+                    abstraction. Through this method we expose a single struct variable that contains all the relevant information we
+                    need in our other classes for handling player inputs.
+                </p>
+                <p>
+                    Written in C#. Code is not written exactly as it is in game.
+                </p>
+                <div class="codeexamplesmallest">
+                    <span class="type">public enum</span> <span class="cenum">AdjustedDirectionX</span> {None, Forward, Backward}; <br><br>
+
+                    <span class="type">public struct</span> <span class="cenum">InputPattern</span>{<br>
+	                    &emsp;&emsp;<span class="type">public</span> <span class="cenum">AdjustedDirectionX</span> adjustedDirectionX;<br>
+	                    &emsp;&emsp;<span class="type">public bool</span> attackLight;<br>
+	                    &emsp;&emsp;<span class="type">public bool</span> attackMedium;<br>
+	                    &emsp;&emsp;<span class="type">public bool</span> attackHeavy;<br><br>
+
+	                    &emsp;&emsp;<span class="type">public</span> <span class="cenum">InputPattern</span>(<span class="cenum">AdjustedDirectionX</span> dirX, <span class="type">bool</span> attackA, <span class="type">bool</span> attackB, <span class="type">bool</span> attackC){<br>
+                        &emsp;&emsp;&emsp;&emsp;adjustedDirectionX = dirX;<br>
+                        &emsp;&emsp;&emsp;&emsp;attackLight = attackA;<br>
+                        &emsp;&emsp;&emsp;&emsp;attackMedium = attackB;<br>
+                        &emsp;&emsp;&emsp;&emsp;attackHeavy = attackC;<br>
+                        &emsp;&emsp;} <br><br>
+
+                        &emsp;&emsp;<span class="type">public static bool operator</span> == (<span class="cenum">InputPattern</span> a, <span class="cenum">InputPattern</span> b){<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="type">bool</span> isEqualTo = <span class="type">false</span>;<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="type">int</span> dirA = (<span class="type">int</span>)a.adjustedDirectionX;<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="type">int</span> dirB = (<span class="type">int</span>)b.adjustedDirectionX;<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="type">if</span>(dirA == dirB &&<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;a.attackLight == b.attackLight &&<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;a.attackMedium == b.attackMedium &&<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;a.attackHeavy == b.attackHeavy)<br>
+                        &emsp;&emsp;&emsp;&emsp;{<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;isEqualTo = <span class="type">true</span>;<br>
+                        &emsp;&emsp;&emsp;&emsp;}<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="condition">return</span> isEqualTo;<br>
+                        &emsp;&emsp;}<br><br>
+
+                        &emsp;&emsp;<span class="type">public static bool operator</span> == (<span class="cenum">InputPattern</span> a, <span class="cenum">InputPattern</span> b){<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="type">bool</span> isNotEqualTo = <span class="type">true</span>;<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="type">int</span> dirA = (<span class="type">int</span>)a.adjustedDirectionX;<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="type">int</span> dirB = (<span class="type">int</span>)b.adjustedDirectionX;<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="condition">if</span>(dirA == dirB &&<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;a.attackLight == b.attackLight &&<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;a.attackMedium == b.attackMedium &&<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;a.attackHeavy == b.attackHeavy)<br>
+                        &emsp;&emsp;&emsp;&emsp;{<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;isNotEqualTo = <span class="type">false</span>;<br>
+                        &emsp;&emsp;&emsp;&emsp;}<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="condition">return</span> isNotEqualTo;<br>
+                        &emsp;&emsp;}<br><br>
+
+                        &emsp;&emsp;<span class="type">public static</span> <span class="cenum">InputPattern</span> ForwardLight {<span class="type">get</span> <br>
+                        &emsp;&emsp;&emsp;&emsp;{<span class="condition">return new</span> <span class="cenum">InputPattern</span>(<span class="cenum">AdjustedDirectionX</span>.Forward, <span class="type">true</span>, <span class="type">false</span>, <span class="type">false</span>); }}<br>
+                        &emsp;&emsp;<span class="type">public static</span> <span class="cenum">InputPattern</span> BackwardHeavy {<span class="type">get</span> <br>
+                        &emsp;&emsp;&emsp;&emsp;{<span class="condition">return new</span> <span class="cenum">InputPattern</span>(<span class="cenum">AdjustedDirectionX</span>.Backward, <span class="type">false</span>, <span class="type">true</span>, <span class="type">false</span>); }}<br>
+                        &emsp;&emsp;<span class="type">public static</span> <span class="cenum">InputPattern</span> SpecialAttack {<span class="type">get</span> <br>
+                        &emsp;&emsp;&emsp;&emsp;{<span class="condition">return new</span> <span class="cenum">InputPattern</span>(<span class="cenum">AdjustedDirectionX</span>.None, <span class="type">true</span>, <span class="type">true</span>, <span class="type">true</span>); }}<br>
+                    }<br><br>
+
+                    <span class="type">public static class</span> <span class="cclass">FilteredInput</span>{<br><br>
+
+                        &emsp;&emsp;<span class="type">private static</span> <span class="cenum">InputPattern</span> playerInputPattern;<br>
+                        &emsp;&emsp;<span class="type">public static</span> <span class="cenum">InputPattern</span> PlayerInputPattern {<span class="type">get</span> {<span class="condition">return</span> playerInputPattern;} }<br><br>
+
+                        &emsp;&emsp;<span class="method">Update</span>(<span class="type">float</span> deltaTime){<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="type">bool</span> facingLeft = <span class="cclass">Player</span>.facingLeft;<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="cenum">AdjustedDirectionX</span> adjustedDirX;<br>
+                        <!-- &emsp;&emsp;&emsp;&emsp;facingLeft = <span class="cclass">Player</span>.facingLeft;<br><br> -->
+
+                        &emsp;&emsp;&emsp;&emsp;<span class="type">if</span>(<span class="cclass">Input</span>.Left && <span class="cclass">Input</span>.Right){<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;adjustedDirX = <span class="cenum">AdjustedDirectionX</span>.None;<br>
+                        &emsp;&emsp;&emsp;&emsp;}<span class="type">else if</span>(<span class="cclass">Input</span>.Left && !<span class="cclass">Input</span>.Right){<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="type">if</span>(facingLeft){<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;adjustedDirX = <span class="cenum">AdjustedDirectionX</span>.Forward;<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<span class="type">else</span>{<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;adjustedDirX = <span class="cenum">AdjustedDirectionX</span>.Backward;<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+                        &emsp;&emsp;&emsp;&emsp;}<span class="type">else if</span>(!<span class="cclass">Input</span>.Left && <span class="cclass">Input</span>.Right) {<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="type">if</span>(facingLeft){<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;adjustedDirX = <span class="cenum">AdjustedDirectionX</span>.Backward;<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<span class="type">else</span>{<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;adjustedDirX = <span class="cenum">AdjustedDirectionX</span>.Forward;<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+                        &emsp;&emsp;&emsp;&emsp;}<span class="type">else</span>{<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;adjustedDirX = <span class="cenum">AdjustedDirectionX</span>.None;<br>
+                        &emsp;&emsp;&emsp;&emsp;}<br><br>
+
+                        &emsp;&emsp;&emsp;&emsp;playerInputPattern = <span class="type">new</span> <span class="cenum">InputPattern</span>{<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;adjustedDirectionX = adjustedDirX;<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;attackLight = <span class="cclass">Input</span>.IsKeyHold(keybinds[<span class="cenum">0</span>]);<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;attackMedium = <span class="cclass">Input</span>.IsKeyHold(keybinds[<span class="cenum">1</span>]);<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;attackHeavy = <span class="cclass">Input</span>.IsKeyHold(keybinds[<span class="cenum">2</span>]);<br>
+                        &emsp;&emsp;&emsp;&emsp;}<br>
+                        &emsp;&emsp;}<br>
+                    }<br><br>
+
+                    <span class="type">public class</span> <span class="cclass">Player</span>{<br><br>
+
+                        &emsp;&emsp;<span class="cclass">StateMachine</span> playerState;<br><br>
+
+                        &emsp;&emsp;<span class="type">public</span> <span class="cclass">Player</span>(<span class="cclass">StateMachine</span> initialState){<br>
+                        &emsp;&emsp;&emsp;&emsp;playerState = initialState;<br>
+                        &emsp;&emsp;}<br><br>
+
+                        &emsp;&emsp;<span class="method">Update</span> (<span class="type">float</span> deltaTime){<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="type">if</span> (<span class="cclass">FilteredInput</span>.PlayerInputPattern == <span class="cenum">InputPattern</span>.SpecialAttack{<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="comment">//Unleash a powerful Special Attack!</span><br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;playerState = <span class="cclass">SpecialAttackState</span>;<br>
+                        &emsp;&emsp;&emsp;&emsp;}<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="type">if</span> (<span class="cclass">FilteredInput</span>.PlayerInputPattern == <span class="cenum">InputPattern</span>.BackwardHeavy{<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="comment">//Reach out and grab the player, pulling them toward you!</span><br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;playerState = <span class="cclass">BackwardMediumState</span>;<br>
+                        &emsp;&emsp;&emsp;&emsp;}<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="type">if</span> (<span class="cclass">FilteredInput</span>.PlayerInputPattern == <span class="cenum">InputPattern</span>.ForwardLight{<br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="comment">//Lunge forward and throw out a light punch!</span><br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;playerState = <span class="cclass">ForwardLightState</span>;<br>
+                        &emsp;&emsp;&emsp;&emsp;}<br>
+                        &emsp;&emsp;}<br>
+                    }<br>
+                </div>
+            </div>
+        </span>
+
+        <br>
+        <span id="section4" class="sectionheader">
+            <span>Tutorial</span>
+            <div class="sectionsubtextsmall">
+                <p>
+                    One of <em>Labyrinth's</em> main mechanics is it's combo system. We need to know what the player is inputting
+                    on a particular frame to determine what attack to do.  An attack might be as simple as the player pressing
+                    the <em>A</em> or <em>B</em> keys. But what happens when we want to add directional inputs to our attacks?
+                </p>
+                <p>
+                    Like in fighting games, a heavy attack might be executed by pressing the <em>C</em> button, but that attack
+                    might change slightly if the player inputs a directional button, such as <em>Forward + C</em>. Players might
+                    always refer to this as <em>Forward + C</em>, but depending on what direction the player is facing, the player
+                    could be inputting either <em>Left</em> or <em>Right</em> for the <em>Forward</em> input. As programmers, how
+                    do we simplify this information so we only have to check if the player is pressing forward, rather than constantly
+                    check if the left or right input the player is holding is forward or not?
+                </p>
+                <p>
+                    Let's create an enum to define our Forward and Backward inputs. Next, we'll create and a struct called
+                    <em>InputPattern</em> and populate it with our adjusted direction and all of the buttons the player is
+                    currently pressing for the current frame.
+                </p>
+                <div class="codeexample">
+                    <span class="type">public enum</span> <span class="cenum">AdjustedDirectionX</span> {None, Forward, Backward}<br><br>
+
+                    <span class="type">public struct</span> <span class="cenum">InputPattern</span>{<br><br>
+                        &emsp;&emsp;<span class="type">public</span> <span class="cenum">AdjustedDirectionX</span> adjustedDirectionX;<br><br>
+	                    &emsp;&emsp;<span class="type">public bool</span> attackLight;<br>
+	                    &emsp;&emsp;<span class="type">public bool</span> attackMedium;<br>
+	                    &emsp;&emsp;<span class="type">public bool</span> attackHeavy;<br><br>
+
+                        &emsp;&emsp;<span class="type">public</span> <span class="cenum">InputPattern</span>(<span class="cenum">AdjustedDirectionX</span> dirX, <span class="type">bool</span> attackA,<br>
+                        &emsp;&emsp;&emsp;<span class="type">bool</span> attackB, <span class="type">bool</span> attackC)<br>
+                        &emsp;&emsp;{ <br>
+                            &emsp;&emsp;&emsp;&emsp;adjustedDirectionX = dirX;<br>
+                            &emsp;&emsp;&emsp;&emsp;attackLight = attackA;<br>
+                            &emsp;&emsp;&emsp;&emsp;attackMedium = attackB;<br>
+                            &emsp;&emsp;&emsp;&emsp;attackHeavy = attackC;<br>
+                            &emsp;&emsp;}<br>
+                    }<br><br>
+                </div>
+                <br><br>
+                <p>
+                    Next, lets create a static class called <em>FilteredInput</em> and define one of our <em>InputPattern</em> structs.
+                    Let's define our <em>InputPattern</em> as a property so it can't be modified outside of this class. This way, we
+                    can use our <em>FilteredInput</em> class anywhere in our code to grab a collection of what buttons the player is
+                    currently pressing, with a directional input adjusted to what direction the player is currently facing.
+                </p>
+                <p>
+                    In our <em>Update</em> method, we'll store a bool for what direction our player is currently facing, which
+                    we'll pull from the Player class. We'll also declare one of our AdjustedDirectionX enums.
+                </p>
+                <div class="codeexample">
+                    <span class="type">public static class</span> <span class="cclass">FilteredInput</span>{<br><br>
+                        &emsp;&emsp;<span class="type">private static</span> <span class="cenum">InputPattern</span> playerInputPattern;<br>
+                        &emsp;&emsp;<span class="type">public static</span> <span class="cenum">InputPattern</span> PlayerInputPattern <br>
+                        &emsp;&emsp;&emsp;&emsp;{<span class="type">get</span> { <span class="condition">return</span> playerInputPattern; } }<br><br>
+
+                        &emsp;&emsp;<span class="method">Update</span>(<span class="type">float</span> deltaTime){<br><br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="type">bool</span> facingLeft = <span class="cclass">Player</span>.FacingLeft;<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="cenum">AdjustedDirectionX</span> adjustedDirX;<br>
+                        &emsp;&emsp;}<br>
+                    }
+                </div>
+                <br><br>
+                <p>
+                    Next, let's get the direction our Player is currently pressing and convert it to either <em>Forward</em> or
+                    <em>Backward</em> depending on what direction the player is facing.
+                </p>
+                <div class="codeexample">
+                    <span class="type">if</span>(<span class="cclass">Input</span>.Left && <span class="cclass">Input</span>.Right)<br>{<br>
+                        &emsp;&emsp;<span class="comment">//Both left and right are pressed,</span><br>
+                        &emsp;&emsp;<span class="comment">//so we wont move.</span><br>
+                        &emsp;&emsp;adjustedDirX = AdjustedDirectionX.None;<br>
+
+                    }<br><br>
+                    <span class="type">else if</span>(<span class="cclass">Input</span>.Left && !<span class="cclass">Input</span>.Right)<br>{<br>
+                        &emsp;&emsp;<span class="comment">//Player is pressing Left.</span><br>
+                        &emsp;&emsp;<span class="comment">//What direction are they facing?</span><br>
+                        &emsp;&emsp;<span class="type">if</span>(facingLeft){<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="comment">//Player is Facing Left and pressing Left.</span><br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="comment">//Player is pushing "Forward".</span><br>
+                        &emsp;&emsp;&emsp;&emsp;adjustedDirX = <span class="cenum">AdjustedDirectionX</span>.Forward;<br><br>
+
+                        &emsp;&emsp;}<span class="type">else</span>{<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="comment">//Player is Facing Left and pressing Right.</span><br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="comment">//Player is pushing "Backward".</span><br>
+                        &emsp;&emsp;&emsp;&emsp;adjustedDirX = <span class="cenum">AdjustedDirectionX</span>.Backward;<br>
+                        &emsp;&emsp;}<br>
+                    }<br><br><span class="type">else if</span>(!<span class="cclass">Input</span>.Left && <span class="cclass">Input</span>.Right)<br>{<br>
+                        &emsp;&emsp;<span class="comment">//Player is pressing Right.</span><br>
+                        &emsp;&emsp;<span class="comment">//What direction are they facing?</span><br>
+                        &emsp;&emsp;<span class="type">if</span>(facingLeft){<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="comment">//Player is Facing Left and pressing Right.</span><br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="comment">//Player is pushing "Backward".</span><br>
+                        &emsp;&emsp;&emsp;&emsp;adjustedDirX = <span class="cenum">AdjustedDirectionX</span>.Backward;<br>
+                        &emsp;&emsp;}<span class="type">else</span>{<br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="comment">//Player is Facing Right and pressing Right.</span><br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="comment">//Player is pushing "Forward".</span><br>
+                        &emsp;&emsp;&emsp;&emsp;adjustedDirX = <span class="cenum">AdjustedDirectionX</span>.Forward;<br>
+                        &emsp;&emsp;}<br>
+                    }<br><br><span class="type">else</span><br>{<br>
+                        &emsp;&emsp;<span class="comment">//The player must not be pressing a directional button.</span><br>
+                        &emsp;&emsp;adjustedDirX = <span class="cenum">AdjustedDirectionX</span>.None;<br>
+                    }<br>
+                </div>
+                <p>
+                    Finally, we'll set all the values for our "InputPattern" variable.
+                </p>
+                <div class="codeexample">
+                    playerInputPattern = <span class="type">new</span> <span class="cenum">InputPattern</span>{<br><br>
+                        &emsp;&emsp;adjustedDirectionX = adjustedDirX;<br>
+                        &emsp;&emsp;attackLight = <span class="cclass">Input</span>.IsKeyHold(keybinds[<span class="cenum">0</span>]);<br>
+                        &emsp;&emsp;attackMedium = <span class="cclass">Input</span>.IsKeyHold(keybinds[<span class="cenum">1</span>]);<br>
+                        &emsp;&emsp;attackHeavy = <span class="cclass">Input</span>.IsKeyHold(keybinds[<span class="cenum">2</span>]);<br><br>
+                    }<br>
+                </div>
+                <br><br>
+                <p>
+                    We're done! Now we can use our <em>FilteredInput</em> class from anywhere else in our code to see what
+                    the player is currently pressing. For example, we can use this in our Player class to move to a new
+                    attack state.
+                </p>
+                <div class="codeexample">
+                    <span class="cenum">InputPattern</span> ip = <span class="cclass">FilteredInput</span>.PlayerInputPattern;<br>
+                    <span class="type">if</span>(ip.adjustedDirX == <span class="cenum">AdjustedDirectionX</span>.Forward && <br>
+                        &emsp;ip.attackLight == <span class="type">true</span> && <br>
+                        &emsp;ip.attackMedium == <span class="type">false</span> && <br>
+                        &emsp;ip.attackHeavy == <span class="type">false</span>) <br>
+                    {<br>
+                        &emsp;&emsp;<span class="comment">//Throw a light punch and lunge forward!</span> <br>
+                    }
+                </div>
+                <br><br>
+                <p>
+                    Our "if" statement is quite messy. It's still a bit too much code to be writing every time we want to check what
+                    the player is currently inputing.
+                    We can clean this up by expanding our InputPattern struct to contain
+                    an operator for <em>==</em> and <em>!=</em>.
+                </p>
+                <div class="codeexample">
+                    <span class="comment">//At the bottom of InputPattern struct.</span><br>
+                    <span class="type">public static bool operator</span> == (<span class="cenum">InputPattern</span> a, <span class="cenum">InputPattern</span> b){<br>
+                        &emsp;&emsp;<span class="type">bool</span> isEqualTo = <span class="type">false</span>;<br>
+                        &emsp;&emsp;<span class="type">int</span> dirA = (<span class="type">int</span>)a.adjustedDirectionX;<br>
+                        &emsp;&emsp;<span class="type">int</span> dirB = (<span class="type">int</span>)b.adjustedDirectionX;<br><br>
+                        &emsp;&emsp;<span class="type">if</span>(dirA == dirB &&<br>
+                        &emsp;&emsp;&emsp;a.attackLight == b.attackLight &&<br>
+                        &emsp;&emsp;&emsp;a.attackMedium == b.attackMedium &&<br>
+                        &emsp;&emsp;&emsp;a.attackHeavy == b.attackHeavy)<br>
+                        &emsp;&emsp;{<br>
+                            &emsp;&emsp;&emsp;&emsp;isEqualTo = <span class="type">true</span>;<br>
+                        &emsp;&emsp;}<br><br>
+
+                        &emsp;&emsp;<span class="condition">return</span> isEqualTo;<br>
+                    }<br><br>
+                    <span class="type">public static bool operator</span> == (<span class="cenum">InputPattern</span> a, <span class="cenum">InputPattern</span> b){<br>
+                        &emsp;&emsp;<span class="type">bool</span> isNotEqualTo = <span class="type">true</span>;<br>
+                        &emsp;&emsp;<span class="type">int</span> dirA = (<span class="type">int</span>)a.adjustedDirectionX;<br>
+                        &emsp;&emsp;<span class="type">int</span> dirB = (<span class="type">int</span>)b.adjustedDirectionX;<br><br>
+                        &emsp;&emsp;<span class="type">if</span>(dirA == dirB &&<br>
+                        &emsp;&emsp;&emsp;a.attackLight == b.attackLight &&<br>
+                        &emsp;&emsp;&emsp;a.attackMedium == b.attackMedium &&<br>
+                        &emsp;&emsp;&emsp;a.attackHeavy == b.attackHeavy)<br>
+                            &emsp;&emsp;{<br>
+                                &emsp;&emsp;&emsp;&emsp;isNotEqualTo = <span class="type">false</span>;<br>
+                            &emsp;&emsp;}<br>
+                            &emsp;&emsp;<span class="condition">return</span> isNotEqualTo;<br>
+                    }
+                </div>
+                <br><br>
+                <p>
+                    Now let's go back to our earlier "if" statement and implement our new operators.
+                </p>
+                <div class="codeexample">
+                    <span class="cenum">InputPattern</span> forwardHeavy = <span class="type">new</span> <span class="cenum">InputPattern</span>(<span class="cenum">AdjustedDirectionX</span>.Forward, <span class="type">false</span>, <span class="type">false</span>, <span class="type">true</span>);<br><br>
+                    <span class="cenum">InputPattern</span> ip = <span class="cclass">FilteredInput</span>.PlayerInputPattern;<br><br>
+                    <span class="type">if</span>(ip == forwardHeavy)<br>
+                    {<br>
+                        &emsp;&emsp;<span class="comment">//Lunge forward and hit the enemy with a heavy attack!</span> <br>
+                    }
+                </div>
+                <br><br>
+                <p>
+                    But we can still make this better! We can create definitions for our <em>InputPattern</em> struct so that we
+                    don't have to keep defining "Forward + HeavyAttack" in case we have multiple characters or weapons that use the same InputPattern.
+                </p>
+                <p>
+                    Let's go back to our <em>InputPattern</em> struct and create some definitions for different player inputs!
+                </p>
+                <div class="codeexamplesmaller">
+                    <span class="type">public static</span> <span class="cenum">InputPattern</span> ForwardLight {<span class="type">get</span> { <br>
+                    &emsp;&emsp;<span class="condition">return</span> <span class="type">new</span> <span class="cenum">InputPattern</span>(<span class="cenum">AdjustedDirectionX</span>.Forward, <span class="type">true</span>, <span class="type">false</span>, <span class="type">false</span>); }}<br><br>
+                    <span class="type">public static</span> <span class="cenum">InputPattern</span> BackwardHeavy {<span class="type">get</span> {<br>
+                    &emsp;&emsp;<span class="condition">return</span> <span class="type">new</span> <span class="cenum">InputPattern</span>(<span class="cenum">AdjustedDirectionX</span>.Backward, <span class="type">false</span>, <span class="type">false</span>, <span class="type">true</span>); }}<br><br>
+                    <span class="type">public static</span> <span class="cenum">InputPattern</span> SpecialAttack {<span class="type">get</span> {<br>
+                    &emsp;&emsp;<span class="condition">return</span> <span class="type">new</span> <span class="cenum">InputPattern</span>(<span class="cenum">AdjustedDirectionX</span>.None, <span class="type">true</span>, <span class="type">false</span>, <span class="type">false</span>); }}<br><br>
+                </div>
+                <br><br>
+                <p>
+                    Finally, we have a clean system of filtering player inputs and easily checking what the player is currently
+                    pressing across the rest of our game. We never have to worry about which direction the player is facing.
+                    Anytime we want to check if the player is moving to a new attack state, it should
+                    look a bit like this...
+                </p>
+                <div class="codeexample">
+                    <span class="cenum">InputPattern</span> ip = <span class="cclass">FilteredInput</span>.PlayerInputPattern; <span class="comment">//Current player input</span><br><br>
+                    <span class="type">if</span>(ip == <span class="cenum">InputPattern</span>.SpecialAttack)<br>
+                    {<br>
+                        &emsp;&emsp;<span class="comment">//Unleash a devastating special attack!</span> <br>
+                    }
+                </div>
+                <br><br>
+            </div>
+        </span>
+        <div>
+            © Maple Lynn 2022
+        </div>
+    </body>
+</html>
